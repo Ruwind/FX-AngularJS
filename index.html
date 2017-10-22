@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Angular应用</title>
+    <link rel="stylesheet" type="text/css" href="./css/wind/base.css"/>
+    <link rel="stylesheet" type="text/css" href="./css/wind/fx.css"/>
+    <link rel="stylesheet" type="text/css" href="./css/wind/fx-ui.css"/>
+    <style type="text/css">
+        #main {
+            width:90%;
+            margin:10px auto;
+        }
+        .goods-item {
+            width:240px;
+            padding:12px 10px;
+            margin:10px;
+            background-color:#626983;
+            color:#fff;
+            float: left;
+        }
+        .goods-item .item-line {
+            line-height:1.2;
+        }
+        .share-wrapper {
+            padding:20px;
+        }
+        .fields-wrapper {
+            font-size:14px;
+        }
+        .route-wrapper {
+            margin:10px;
+            padding:10px;
+        }
+    </style>
+</head>
+<body>
+    <div ng-app="fx" id="main">
+        <div class="goods-wrapper clear"  ng-controller="goodsCtrl">
+            <div class="goods-item" ng-repeat="x in goods">
+                <div class="line">
+                    <span class="item-name">品名：</span>
+                    <span class="item-value">{{x.name}}</span>
+                </div>
+                <div class="line">
+                    <span class="item-name">店铺：</span>
+                    <span class="item-value">{{x.shop}}</span>
+                </div>
+                <div class="line">
+                    <span class="item-name">库存：</span>
+                    <span class="item-value">{{x.store}}</span>
+                </div>
+                <div class="line">
+                    <span class="item-name">单价：</span>
+                    <span class="item-value">{{x.price | currency}}</span>
+                </div>
+                <div class="line">
+                    <span class="item-name">数量：</span>
+                    <span class="item-value">{{x.count}}</span>
+                </div>
+                <div class="line">
+                    <span class="item-name">总计：</span>
+                    <span class="item-value">{{x.price * x.count}}</span>
+                </div>
+            </div>
+        </div>
+        <!--表单内容-->
+        <div class="fields-wrapper" ng-controller="fieldCtrl">
+
+            <form name="test" method="post" action="./server/sub.php" enctype="application/x-www-form-urlencoded" novalidate>
+                <div class="ui-field us-fd-sl us-br us-fs">
+                    <select ng-options="item.value as item.name for item in lang" ng-model="usingLang" ng-init="usingLang=''">
+                        <option value="" ng-selected>--请选择语言--</option>
+                    </select>
+                </div>
+                <div class="ui-field us-fd-sl us-br us-fs">
+                    <input type="text" placeholder="USERNAME" ng-model="loginData.username"/>
+                </div>
+                <div class="ui-filed">
+                    <span>{{loginData.username | nopunct | uppercase}}</span>
+                </div>
+                <div class="ui-field us-fd-sl us-br us-fs">
+                    <input type="password" placeholder="PASSWORD" ng-model="loginData.password"/>
+                </div>
+                <div class="ui-filed">
+                    <span>{{loginData.password | noen}}</span>
+                </div>
+                <div class="ui-field">
+
+                </div>
+                <div class="ui-field">
+                    <input type="checkbox" ng-model="loginData.autologin" ng-false-value="0" ng-true-value="1" id="autologin"/>
+                    <label for="autologin" style="color:#74859c">自动登录</label>
+                </div>
+
+                <input type="hidden" name="userData" />
+                <div class="ui-line us-lt">
+                    <div class="ui-btn us-btn-iat us-hr us-btn-sm" id="add-cate">
+                        <input type="submit" value="提交" />
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!--根据选择框中的值不同来选择显示不同的表单-->
+        <div class="share-wrapper" ng-controller="shareCtrl">
+            <div class="share-type">
+                <select ng-model="shareType" ng-options="item.value as item.name for item in shareTypes">
+                    <option value="" ng-selected>--选择分享资源类型--</option>
+                </select>
+            </div>
+            <div class="share-forms" ng-switch="shareType" ng-class="{a:true,b:true,c:false}">
+                <!--图像表单-->
+                <div class="share-form" ng-switch-when="image">
+                    <h1>image</h1>
+                </div>
+                <!--音乐表单-->
+                <div class="share-form" ng-switch-when="music">
+                    <h1>music</h1>
+                </div>
+                <!--下载表单-->
+                <div class="share-form" ng-switch-when="download">
+                    <h1>download</h1>
+                </div>
+                <!--重定向表单-->
+                <div class="share-form" ng-switch-when="redirect">
+                    <h1>redirect</h1>
+                </div>
+                <!--框架表单-->
+                <div class="share-form" ng-switch-when="iframe">
+                    <h1>iframe</h1>
+                </div>
+                <!--xml表单-->
+                <div class="share-form" ng-switch-when="xml">
+                    <h1>xml</h1>
+                </div>
+                <!--文本表单-->
+                <div class="share-form" ng-switch-when="text">
+                    <h1>text</h1>
+                </div>
+                <!--默认表单 显示一些基本信息-->
+                <div class="share-form" ng-switch-default="default">
+                    <h1>default</h1>
+                </div>
+            </div>
+        </div>
+        <!--从服务器加载数据-->
+        <div class="http-get clear" ng-cloak ng-controller="httpCtrl">
+            <div class="goods-item" ng-repeat="x in httpData">
+                <div class="line">
+                    <span class="item-name">品名：</span>
+                    <span class="item-value">{{x.name}}</span>
+                </div>
+                <div class="line">
+                    <span class="item-name">店铺：</span>
+                    <span class="item-value">{{x.shop}}</span>
+                </div>
+                <div class="line">
+                    <span class="item-name">库存：</span>
+                    <span class="item-value">{{x.store}}</span>
+                </div>
+                <div class="line">
+                    <span class="item-name">单价：</span>
+                    <span class="item-value">{{x.price | currency}}</span>
+                </div>
+                <div class="line">
+                    <span class="item-name">数量：</span>
+                    <span class="item-value">{{x.count}}</span>
+                </div>
+                <div class="line">
+                    <span class="item-name">总计：</span>
+                    <span class="item-value">{{x.price * x.count}}</span>
+                </div>
+            </div>
+        </div>
+        <!--路由视图-->
+        <div class="route-wrapper">
+            <div class="item-line">
+                <a href="#/">首页</a>
+                <a href="#/sitemap">站点地图</a>
+                <a href="#/about">关于我们</a>
+            </div>
+            <hr/>
+            <div ng-view></div>
+        </div>
+
+    </div>
+
+</body>
+<script type="text/javascript" src="./js/lib/jquery/jquery.js"></script>
+<script type="text/javascript" src="./js/lib/angular/angular-1.4.6.js"></script>
+<script type="text/javascript" src="./js/lib/angular/angular-route.js"></script>
+<script type="text/javascript" src="./js/index.js"></script>
+<script type="text/javascript">
+    var app = angular.module('fx', ['ngRoute']);
+    //配置路由
+    app.config(['$routeProvider', function ($routeProvider) {
+        $routeProvider.when('/', {
+            template : '首页',
+        }).when('/sitemap', {
+            templateUrl : 'view/sitemap.html'
+        }).when('/about', {
+            templateUrl : 'view/about.html'
+        }).otherwise({
+            redirectTo : '/'
+        });
+    }]);
+    //控制器 1
+    app.controller('goodsCtrl', ['$scope', function ($scope) {
+        $scope.name = 'love xi';
+
+        $scope.goods = [
+            {
+                'name': '化工原理',
+                'price': 49,
+                'store': 10999,
+                'count': 1,
+                'shop': '微风官方书城',
+            },
+            {
+                'name': '计算机组成原理',
+                'price': 79,
+                'store': 999,
+                'count': 1,
+                'shop': '微风官方书城',
+            },
+
+        ];
+
+        $scope.say = function () {
+            console.log(this.$$nextSibling);
+        }
+    }]);
+    //控制器 2
+    app.controller('fieldCtrl', ['$scope', function ($scope){
+
+        $scope.loginData = {
+            username:'',
+            password:'',
+            autologin:'0',
+        };
+        $("form").submit(function () {
+            //提交到隐藏字段
+            $("input[name=userData]").val(angular.toJson($scope.loginData));
+        });
+
+        $scope.lang = [
+            {value : '0', name: 'HTML'},
+            {value : '1', name: 'JavaScript'},
+            {value : '2', name: 'jQuery'},
+            {value : '3', name:  'CSS3'},
+            {value : '4', name:  'Java'},
+            {value : '5', name:  'PHP'},
+            {value : '6', name:  'CSharp'}
+        ]
+
+    }]);
+    //控制器 3
+    app.controller('shareCtrl', ['$scope', function ($scope) {
+        $scope.shareTypes = [
+
+            {name : '图片', value : 'image'},
+            {name : '音乐', value : 'image'},
+            {name : '下载', value : 'download'},
+            {name : '重定向', value : 'redirect'},
+            {name : '框架', value : 'iframe'},
+            {name : '文本', value : 'text'},
+            {name : 'XML', value : 'xml'},
+
+        ];
+    }]);
+    //控制器 4
+    app.controller('httpCtrl', ['$scope','$http', function ($scope, $http) {
+        $http({
+            method : 'Get',
+            url : './server/data.php'
+        }).then(function (response) {
+            $scope.httpData = angular.fromJson(response.data);
+
+        },function (err) {
+            console.log(err);
+        });
+    }]);
+
+    //过滤器 @ open
+    app.filter('noen', function () {
+
+        return function (text) {
+            return text.toString().replace(/[a-z]/g, '');
+        }
+    });
+    //过滤器 @ nopunct
+    app.filter('nopunct', function () {
+        return function (text) {
+            var punct = /[;,\'\"\\\/\?\:\~\`\<\>\=\-\+\[\]\{\}@\#\$%\&\*\(\)\|]/g;
+            return text.toString().replace(punct,'');
+        }
+    });
+
+</script>
+</html>
