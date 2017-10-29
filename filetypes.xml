@@ -3,6 +3,7 @@
     <extensionMap>
       <mapping pattern="page" type="JavaScript" />
       <mapping ext="me" type="PLAIN_TEXT" />
+      <mapping pattern="SearchCtrl" type="YAML" />
     </extensionMap>
   </component>
 </application>
