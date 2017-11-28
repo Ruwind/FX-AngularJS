@@ -5,6 +5,7 @@
       <mapping pattern="200445208mx" type="PLAIN_TEXT" />
       <mapping pattern="wx/service" type="PLAIN_TEXT" />
       <mapping ext="me" type="PLAIN_TEXT" />
+      <mapping ext="thml" type="XHTML" />
       <mapping pattern="SearchCtrl" type="YAML" />
     </extensionMap>
   </component>
