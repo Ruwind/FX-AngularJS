@@ -6,6 +6,7 @@
       <mapping pattern="wx/service" type="PLAIN_TEXT" />
       <mapping ext="me" type="PLAIN_TEXT" />
       <mapping ext="thml" type="XHTML" />
+      <mapping pattern="tool/domReady.js" type="XML" />
       <mapping pattern="SearchCtrl" type="YAML" />
     </extensionMap>
   </component>
