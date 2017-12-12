@@ -8,6 +8,7 @@
       <mapping ext="thml" type="XHTML" />
       <mapping pattern="tool/domReady.js" type="XML" />
       <mapping pattern="SearchCtrl" type="YAML" />
+      <mapping pattern="File.php" type="YouTrack" />
     </extensionMap>
   </component>
 </application>
