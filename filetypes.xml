@@ -6,6 +6,7 @@
       <mapping pattern="wx/service" type="PLAIN_TEXT" />
       <mapping pattern="rebar3" type="PLAIN_TEXT" />
       <mapping ext="me" type="PLAIN_TEXT" />
+      <mapping ext="txtg" type="PLAIN_TEXT" />
       <mapping pattern="wx-upload" type="XHTML" />
       <mapping ext="thml" type="XHTML" />
       <mapping pattern="tool/domReady.js" type="XML" />
