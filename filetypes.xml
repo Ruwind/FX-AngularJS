@@ -10,6 +10,7 @@
       <mapping ext="me" type="PLAIN_TEXT" />
       <mapping ext="txtg" type="PLAIN_TEXT" />
       <mapping pattern="wx-upload" type="XHTML" />
+      <mapping pattern="wx-header" type="XHTML" />
       <mapping ext="thml" type="XHTML" />
       <mapping pattern="tool/domReady.js" type="XML" />
       <mapping pattern="SearchCtrl" type="YAML" />
